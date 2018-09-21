@@ -1,8 +1,7 @@
 package com.fmalessio.mercadolibre.Mutants.services;
 
-import org.springframework.stereotype.Service;
+public interface MutantService {
 
-@Service
-public class MutantService {
+	boolean isMutant(String[] dna);
 
 }
