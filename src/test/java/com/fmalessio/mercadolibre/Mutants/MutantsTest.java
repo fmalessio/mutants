@@ -29,7 +29,7 @@ public class MutantsTest {
 	private MutantService mutantService;
 
 	@TestConfiguration
-	static class EmployeeServiceImplTestContextConfiguration {
+	static class serviceImplTestContextConfiguration {
 		@Bean
 		public MutantService mutantService() {
 			return new MutantServiceImpl();
