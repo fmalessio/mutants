@@ -37,23 +37,33 @@ public class MutantsTest {
 	}
 
 	@Test
-	public void isMutantFrontDireccionTest() {
+	public void isMutantFrontDirectionTest() {
 		System.out.println("Front direction:");
 
 		String[] dna = { "FTGCGA", "CAGTAC", "TTATGT", "AGAAGG", "CCCCTA", "TCACTG" };
 		printDnaInCosole(dna);
 
-		assertEquals(mutantService.isMutant(dna), true);
+		assertEquals(true, mutantService.isMutant(dna));
 	}
 
 	@Test
-	public void isMutantDownDireccionTest() {
+	public void isMutantDownDirectionTest() {
 		System.out.println("Down direction:");
 
 		String[] dna = { "FTGCGA", "CAGTGC", "TTATGT", "AGAAGG", "ACCCTA", "TCACTG" };
 		printDnaInCosole(dna);
 
-		assertEquals(mutantService.isMutant(dna), true);
+		assertEquals(true, mutantService.isMutant(dna));
+	}
+	
+	@Test
+	public void isMutantDiagonalDownDirectionTest() {
+		System.out.println("Diaginal down direction:");
+
+		String[] dna = { "ATGCGA", "CAGTTC", "TTATGT", "AGAAGG", "ACCCTA", "TCACTG" };
+		printDnaInCosole(dna);
+
+		assertEquals(true, mutantService.isMutant(dna));
 	}
 
 	private void printDnaInCosole(String[] dna) {

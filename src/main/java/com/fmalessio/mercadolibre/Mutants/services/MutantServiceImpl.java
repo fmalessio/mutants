@@ -6,7 +6,40 @@ import org.springframework.stereotype.Service;
 public class MutantServiceImpl implements MutantService {
 
 	public boolean isMutant(String[] dna) {
-		return checkFrontDirectionDnaWrapper(dna) || checkDownDirectionDna(dna);
+		return checkFrontDirectionDnaWrapper(dna) || checkDownDirectionDna(dna) || checkDiagonalDownDirectionDna(dna);
+	}
+
+	/**
+	 * Diagonal down
+	 */
+	private boolean checkDiagonalDownDirectionDna(String[] dna) {
+		// First 3 chains
+		for (int i = 0; i <= 2; i++) {
+			String[] letters = dna[i].split("");
+
+			// For each letter - last 3 (top diagonal)
+			for (int j = 0; j < letters.length - 3; j++) {
+				String letter = letters[j];
+
+				int k = i + 1;
+				int count = 1;
+				while (count < 4) {
+					String diagonalDown = String.valueOf(dna[k].charAt(j + count));
+					if (letter.equals(diagonalDown)) {
+						count++;
+					} else {
+						break;
+					}
+					k++;
+				}
+
+				if (count == 4) {
+					return true;
+				}
+
+			}
+		}
+		return false;
 	}
 
 	/**
