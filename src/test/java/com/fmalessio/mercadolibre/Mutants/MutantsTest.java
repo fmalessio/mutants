@@ -23,9 +23,6 @@ public class MutantsTest {
 	// };
 
 	@Autowired
-	private MockMvc mvc;
-
-	@Autowired
 	private MutantService mutantService;
 
 	@TestConfiguration
@@ -40,7 +37,7 @@ public class MutantsTest {
 	public void isMutantFrontDirectionTest() {
 		System.out.println("Front direction:");
 
-		String[] dna = { "FTGCGA", "CAGTAC", "TTATGT", "AGAAGG", "CCCCTA", "TCACTG" };
+		String[] dna = { "FTGCGA", "CAGTAC", "TTATGT", "AGAAGG", "TCACTG", "CCCCTA" };
 		printDnaInCosole(dna);
 
 		assertEquals(true, mutantService.isMutant(dna));
@@ -64,6 +61,26 @@ public class MutantsTest {
 		printDnaInCosole(dna);
 
 		assertEquals(true, mutantService.isMutant(dna));
+	}
+	
+	@Test
+	public void isMutantDiagonalUpDirectionTest() {
+		System.out.println("Diaginal up direction:");
+
+		String[] dna = { "TTGAAG", "CAATTC", "TAGTGT", "AGAGGG", "ACCCGA", "TCACTT" };
+		printDnaInCosole(dna);
+
+		assertEquals(true, mutantService.isMutant(dna));
+	}
+	
+	@Test
+	public void isHumanTest() {
+		System.out.println("Human:");
+
+		String[] dna = { "ATGCGA", "CAGTGC", "TTATTT", "AGACGG", "GCGTCA", "TCACTG" };
+		printDnaInCosole(dna);
+
+		assertEquals(false, mutantService.isMutant(dna));
 	}
 
 	private void printDnaInCosole(String[] dna) {
