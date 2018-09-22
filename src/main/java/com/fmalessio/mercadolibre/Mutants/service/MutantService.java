@@ -1,4 +1,4 @@
-package com.fmalessio.mercadolibre.Mutants.services;
+package com.fmalessio.mercadolibre.Mutants.service;
 
 public interface MutantService {
 

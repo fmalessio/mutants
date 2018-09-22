@@ -9,8 +9,8 @@ import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import com.fmalessio.mercadolibre.Mutants.services.MutantService;
-import com.fmalessio.mercadolibre.Mutants.services.MutantServiceImpl;
+import com.fmalessio.mercadolibre.Mutants.service.MutantService;
+import com.fmalessio.mercadolibre.Mutants.service.MutantServiceImpl;
 
 @RunWith(SpringRunner.class)
 public class MutantsTest {

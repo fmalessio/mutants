@@ -13,7 +13,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 
-import com.fmalessio.mercadolibre.Mutants.controllers.MutantController;
+import com.fmalessio.mercadolibre.Mutants.controller.MutantController;
 
 @RunWith(SpringRunner.class)
 @WebMvcTest(MutantController.class)
@@ -25,7 +25,7 @@ public class MutantsApplicationTests {
 	@Test
 	public void contextLoads() throws Exception {
 		// Check status
-		MvcResult result = mvc.perform(get("/mutants/testApi?name=Mutant").contentType(MediaType.TEXT_PLAIN))
+		MvcResult result = mvc.perform(get("/testApi?name=Mutant").contentType(MediaType.TEXT_PLAIN))
 				.andExpect(status().isOk()).andReturn();
 		// Check response
 		assertEquals("Hello Mutant!", result.getResponse().getContentAsString());
