@@ -5,22 +5,15 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.test.web.servlet.MockMvc;
 
-import com.fmalessio.mercadolibre.Mutants.controllers.MutantController;
 import com.fmalessio.mercadolibre.Mutants.services.MutantService;
 import com.fmalessio.mercadolibre.Mutants.services.MutantServiceImpl;
 
 @RunWith(SpringRunner.class)
-@WebMvcTest(MutantController.class)
 public class MutantsTest {
-
-	// String[] dna = { "ATGCGA", "CAGTGC", "TTATGT", "AGAAGG", "CCCCTA", "TCACTG"
-	// };
 
 	@Autowired
 	private MutantService mutantService;
@@ -52,7 +45,7 @@ public class MutantsTest {
 
 		assertEquals(true, mutantService.isMutant(dna));
 	}
-	
+
 	@Test
 	public void isMutantDiagonalDownDirectionTest() {
 		System.out.println("Diaginal down direction:");
@@ -62,7 +55,7 @@ public class MutantsTest {
 
 		assertEquals(true, mutantService.isMutant(dna));
 	}
-	
+
 	@Test
 	public void isMutantDiagonalUpDirectionTest() {
 		System.out.println("Diaginal up direction:");
@@ -72,7 +65,7 @@ public class MutantsTest {
 
 		assertEquals(true, mutantService.isMutant(dna));
 	}
-	
+
 	@Test
 	public void isHumanTest() {
 		System.out.println("Human:");
