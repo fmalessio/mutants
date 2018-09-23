@@ -7,13 +7,13 @@ Para ejecutar la aplicación en el ambiente local debemos ir hasta la clase "Mut
 
 Luego, desde cualquier cliente HTTP (Postman recomendado), se podrán ejecutar los [endpoints](#endpoints) utilizando la URL:
 
-	http://localhost:8080
+	- http://localhost:8080
 
 ## Deployado sobre AWS
 
 Se podrán ejecutar los [endpoints](#endpoints) utilizando la URL:
 
-	http://mutants-env.nuxvxcpn33.sa-east-1.elasticbeanstalk.com
+	- http://mutants-env.nuxvxcpn33.sa-east-1.elasticbeanstalk.com
 	
 ### Endpoints
 
@@ -29,12 +29,16 @@ El parámetro "name" defije a quién saludará la aplicación como respuesta, el
 
 Ejemplo:
 - Request:
-
+	
+```json
 	/testApi?name=Mutant
+```
 
 - Response:
 
+```json
 	Hello Mutant!
+```
 	
 ### POST /mutant
 
@@ -46,32 +50,45 @@ Ejemplo 1 - Mutante:
 
 - Request:
 
+```json
 	/mutant
-	
+```
+
 - Headers:
 
+```json
 	Content-Type: application/json
+```
 
 - Request body:
 
-	{ "dna": ["ATGCGA","CAGTGC","TTATGT","AGAAGG","CCCCTA","TCACTG"] }	
-	
+```json
+	{ "dna": ["ATGCGA","CAGTGC","TTATGT","AGAAGG","CCCCTA","TCACTG"] }
+```
+
 - Response:
 
+```json
 	[Status 200 OK]
+```
 	
 Ejemplo 2 - No mutante:
 
 - Request body:
 
+```json
 	{ "dna": ["ATGCGA","CAGTGC","TTATGT","AGAAGG","CCCCTA","TCACTG"] }	
-
+```
+	
 - Response:
 
+```json
 	[Status 403 Forbidden]
+```
 
 - Response body:
 
+```json
 	{
 	    "timestamp": "2018-09-23T21:30:09.727+0000",
 	    "status": 403,
@@ -79,3 +96,4 @@ Ejemplo 2 - No mutante:
 	    "message": "Is not a mutant",
 	    "path": "/mutant"
 	}
+```
