@@ -15,8 +15,8 @@ public class MutantServiceImpl implements MutantService {
 	 */
 	// i = chains/rows. j = letters. k = next positions.
 	private boolean checkDiagonalUpDirectionDna(String[] dna) {
-		// Check from the fourth
-		for (int i = 3; i < dna.length; i++) {
+		// Ex. 6x6 = Check from the fourth
+		for (int i = dna.length - 3; i < dna.length; i++) {
 			String[] letters = dna[i].split("");
 
 			// For each letter - last 3 (top diagonal)
@@ -48,8 +48,8 @@ public class MutantServiceImpl implements MutantService {
 	 * Diagonal down
 	 */
 	private boolean checkDiagonalDownDirectionDna(String[] dna) {
-		// First 3 chains
-		for (int i = 0; i <= 2; i++) {
+		// Ex. 6x6 = First 3 chains
+		for (int i = 0; i < dna.length - 3; i++) {
 			String[] letters = dna[i].split("");
 
 			// For each letter - last 3 (top diagonal)
@@ -81,8 +81,8 @@ public class MutantServiceImpl implements MutantService {
 	 * Down
 	 */
 	private boolean checkDownDirectionDna(String[] dna) {
-		// First 3 chains
-		for (int i = 0; i <= 2; i++) {
+		// Ex. 6x6 = First 3 chains
+		for (int i = 0; i < dna.length - 3; i++) {
 			String[] letters = dna[i].split("");
 
 			// For each letter
@@ -125,8 +125,8 @@ public class MutantServiceImpl implements MutantService {
 
 	private boolean checkFrontDirectionDna(String chain) {
 		String letter = "";
-		// First 3 letter positions
-		for (int i = 0; i <= 2; i++) {
+		// Ex. 6x6 = First 3 letter positions
+		for (int i = 0; i < chain.length() - 3; i++) {
 			letter = String.valueOf(chain.charAt(i));
 
 			int j = i + 1;
