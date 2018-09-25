@@ -67,6 +67,16 @@ public class MutantsTest {
 	}
 
 	@Test
+	public void isMutantMixTest() {
+		System.out.println("Diaginal up direction:");
+
+		String[] dna = { "ATGCGA", "CAGTGC", "TTATGT", "AGAAGG", "CCCCTA", "TCACTG" };
+		printDnaInCosole(dna);
+
+		assertEquals(true, mutantService.isMutant(dna));
+	}
+
+	@Test
 	public void isHumanTest() {
 		System.out.println("Human:");
 
