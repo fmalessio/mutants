@@ -6,15 +6,19 @@ import org.springframework.stereotype.Service;
 public class MutantServiceImpl implements MutantService {
 
 	public boolean isMutant(String[] dna) {
-		return checkFrontDirectionDnaWrapper(dna) || checkDownDirectionDna(dna) || checkDiagonalDownDirectionDna(dna)
-				|| checkDiagonalUpDirectionDna(dna);
+		int dnaSameSequenceCounter = checkFrontDirectionDnaWrapper(dna) + checkDownDirectionDna(dna)
+				+ checkDiagonalDownDirectionDna(dna) + checkDiagonalUpDirectionDna(dna);
+
+		return dnaSameSequenceCounter > 1;
 	}
 
 	/**
 	 * Diagonal up
 	 */
 	// i = chains/rows. j = letters. k = next positions.
-	private boolean checkDiagonalUpDirectionDna(String[] dna) {
+	private int checkDiagonalUpDirectionDna(String[] dna) {
+		int dnaSameSequence = 0;
+
 		// Ex. 6x6 = Check from the fourth
 		for (int i = dna.length - 3; i < dna.length; i++) {
 			String[] letters = dna[i].split("");
@@ -36,18 +40,21 @@ public class MutantServiceImpl implements MutantService {
 				}
 
 				if (count == 4) {
-					return true;
+					dnaSameSequence++;
 				}
 
 			}
 		}
-		return false;
+
+		return dnaSameSequence;
 	}
 
 	/**
 	 * Diagonal down
 	 */
-	private boolean checkDiagonalDownDirectionDna(String[] dna) {
+	private int checkDiagonalDownDirectionDna(String[] dna) {
+		int dnaSameSequence = 0;
+
 		// Ex. 6x6 = First 3 chains
 		for (int i = 0; i < dna.length - 3; i++) {
 			String[] letters = dna[i].split("");
@@ -69,18 +76,21 @@ public class MutantServiceImpl implements MutantService {
 				}
 
 				if (count == 4) {
-					return true;
+					dnaSameSequence++;
 				}
 
 			}
 		}
-		return false;
+
+		return dnaSameSequence;
 	}
 
 	/**
 	 * Down
 	 */
-	private boolean checkDownDirectionDna(String[] dna) {
+	private int checkDownDirectionDna(String[] dna) {
+		int dnaSameSequence = 0;
+
 		// Ex. 6x6 = First 3 chains
 		for (int i = 0; i < dna.length - 3; i++) {
 			String[] letters = dna[i].split("");
@@ -102,28 +112,31 @@ public class MutantServiceImpl implements MutantService {
 				}
 
 				if (count == 4) {
-					return true;
+					dnaSameSequence++;
 				}
 
 			}
 		}
-		return false;
+
+		return dnaSameSequence;
 	}
 
 	/**
 	 * Front
 	 */
-	private boolean checkFrontDirectionDnaWrapper(String[] dna) {
-		boolean isMutant = false;
+	private int checkFrontDirectionDnaWrapper(String[] dna) {
+		int dnaSameSequence = 0;
 
-		for (int i = 0; i < dna.length && !isMutant; i++) {
-			isMutant = checkFrontDirectionDna(dna[i]);
+		for (int i = 0; i < dna.length; i++) {
+			dnaSameSequence += checkFrontDirectionDna(dna[i]);
 		}
 
-		return isMutant;
+		return dnaSameSequence;
 	}
 
-	private boolean checkFrontDirectionDna(String chain) {
+	private int checkFrontDirectionDna(String chain) {
+		int dnaSameSequence = 0;
+
 		String letter = "";
 		// Ex. 6x6 = First 3 letter positions
 		for (int i = 0; i < chain.length() - 3; i++) {
@@ -141,11 +154,11 @@ public class MutantServiceImpl implements MutantService {
 			}
 
 			if (count == 4) {
-				return true;
+				dnaSameSequence++;
 			}
 		}
 
-		return false;
+		return dnaSameSequence;
 	}
 
 	public static boolean isValidDna(String[] dna) {
