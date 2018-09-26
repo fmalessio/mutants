@@ -8,7 +8,6 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -17,7 +16,6 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
 import com.fmalessio.mercadolibre.Mutants.controller.MutantController;
-import com.fmalessio.mercadolibre.Mutants.entity.Mutant;
 import com.fmalessio.mercadolibre.Mutants.service.MutantService;
 
 @RunWith(SpringRunner.class)
@@ -29,9 +27,6 @@ public class MutantsApiTest {
 
 	@MockBean
 	private MutantService mutantService;
-
-	@Mock
-	private Mutant mutant;
 
 	@Test
 	public void isMutant() throws Exception {

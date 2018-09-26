@@ -15,6 +15,16 @@ Se podrán ejecutar los [endpoints](#endpoints) utilizando la URL:
 
 	- http://mutants-env.nuxvxcpn33.sa-east-1.elasticbeanstalk.com
 	
+## Base de datos
+
+Se utiliza una base de datos relacional MySQL:
+
+	- mutantsdb.cbmkeepkk0bf.sa-east-1.rds.amazonaws.com:3306
+
+Comentarios:
+Por medio de un "Converter" se transformará el dna (String[]) en un String concatenando mediante un símbolo las cadenas y se guardará como id de la tabla "dna". Para recuperar la entidad se hace el paso inverso.
+Para más detalles ver: "DnaIdColumnConverter.java"
+
 ### Endpoints
 
 API Resources, Request & Response
@@ -25,7 +35,7 @@ API Resources, Request & Response
 ### GET /testApi
 
 El objetivo de este endpoint es poder verificar que la aplicación este funcionando correctamente.
-El parámetro "name" defije a quién saludará la aplicación como respuesta, el valor por defecto es "World".
+El parámetro "name" define a quién saludará la aplicación como respuesta, el valor por defecto es "World".
 
 Ejemplo:
 - Request:

@@ -1,15 +1,27 @@
 package com.fmalessio.mercadolibre.Mutants.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.fmalessio.mercadolibre.Mutants.entity.Dna;
+import com.fmalessio.mercadolibre.Mutants.repository.DnaRepository;
 
 @Service
 public class MutantServiceImpl implements MutantService {
+
+	@Autowired
+	private DnaRepository dnaRepository;
 
 	public boolean isMutant(String[] dna) {
 		int dnaSameSequenceCounter = checkFrontDirectionDnaWrapper(dna) + checkDownDirectionDna(dna)
 				+ checkDiagonalDownDirectionDna(dna) + checkDiagonalUpDirectionDna(dna);
 
-		return dnaSameSequenceCounter > 1;
+		boolean isMutant = dnaSameSequenceCounter > 1;
+		Dna dnaEntity = new Dna(dna, isMutant);
+
+		dnaRepository.save(dnaEntity);
+
+		return isMutant;
 	}
 
 	/**

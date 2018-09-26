@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
-import com.fmalessio.mercadolibre.Mutants.entity.Mutant;
+import com.fmalessio.mercadolibre.Mutants.entity.Dna;
 import com.fmalessio.mercadolibre.Mutants.exception.NotMutantException;
 import com.fmalessio.mercadolibre.Mutants.service.MutantService;
 
@@ -28,8 +28,8 @@ public class MutantController {
 
 	@PostMapping("/mutant")
 	@ResponseStatus(value = HttpStatus.OK)
-	public void isMutant(@RequestBody Mutant mutant) throws NotMutantException {
-		if (!mutantService.isMutant(mutant.getDna())) {
+	public void isMutant(@RequestBody Dna dna) throws NotMutantException {
+		if (!mutantService.isMutant(dna.getDna())) {
 			throw new NotMutantException();
 		}
 	}
