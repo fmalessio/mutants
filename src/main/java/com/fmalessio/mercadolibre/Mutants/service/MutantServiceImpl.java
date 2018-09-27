@@ -3,7 +3,7 @@ package com.fmalessio.mercadolibre.Mutants.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.fmalessio.mercadolibre.Mutants.entity.Dna;
+import com.fmalessio.mercadolibre.Mutants.dto.DnaDTO;
 import com.fmalessio.mercadolibre.Mutants.repository.DnaRepository;
 
 @Service
@@ -17,9 +17,9 @@ public class MutantServiceImpl implements MutantService {
 				+ checkDiagonalDownDirectionDna(dna) + checkDiagonalUpDirectionDna(dna);
 
 		boolean isMutant = dnaSameSequenceCounter > 1;
-		Dna dnaEntity = new Dna(dna, isMutant);
+		DnaDTO dnaDTO = new DnaDTO(dna, isMutant);
 
-		dnaRepository.save(dnaEntity);
+		dnaRepository.saveAndFlush(dnaDTO.convertToDnaEntity());
 
 		return isMutant;
 	}
