@@ -1,6 +1,6 @@
 # Proyecto de detección de mutantes
 
-Tecnologías utilizadas Java, Spring boot, MVC, Amazon Web Services (AWS) y MySQL.
+Tecnologías utilizadas Java, Spring boot, JPA, MVC, Amazon Web Services (AWS) y MySQL.
 
 ## Local
 Para ejecutar la aplicación en el ambiente local debemos ir hasta la clase "MutantsApplication" en el paquete "com.fmalessio.mercadolibre.Mutants", luego click derecho sobre la clase "Run as" -> "Java application".
@@ -13,17 +13,22 @@ Luego, desde cualquier cliente HTTP (Postman recomendado), se podrán ejecutar l
 
 Se podrán ejecutar los [endpoints](#endpoints) utilizando la URL:
 
-	- http://mutants-env.nuxvxcpn33.sa-east-1.elasticbeanstalk.com
+	- http://mutants-prod.sa-east-1.elasticbeanstalk.com
 	
 ## Base de datos
 
 Se utiliza una base de datos relacional MySQL:
 
-	- mutantsdb.cbmkeepkk0bf.sa-east-1.rds.amazonaws.com:3306
+	- mutantsdb.cbmkeepkk0bf.sa-east-1.rds.amazonaws.com
 
 Comentarios:
-Por medio de un "Converter" se transformará el dna (String[]) en un String concatenando mediante un símbolo las cadenas y se guardará como id de la tabla "dna". Para recuperar la entidad se hace el paso inverso.
-Para más detalles ver: "DnaIdColumnConverter.java"
+Los DNA serán únicos por individuo (mutante o humano), por lo tanto las cadenas que adn se concatenan con "-" y se guardan como un identificador.
+Para más detalles revisar la entidad: "Dna.java" en el paquete "com.fmalessio.mercadolibre.Mutants.entity"
+
+Esquema:
+Nombre de la base de datos: "mutantsdb"
+2 Comlumnas: dna (string), is_mutant (boolean)
+dna será el ID, por ejemplo: "ATGCGA-CAGTGC-TTATGT-AGAAGG-CCCCTA-TCACTG"
 
 ### Endpoints
 
@@ -31,6 +36,7 @@ API Resources, Request & Response
 
   - [GET /testApi](#get-testapi)
   - [POST /mutant](#post-mutant)
+  - [GET /stats](#get-stats)
 
 ### GET /testApi
 
@@ -105,5 +111,26 @@ Ejemplo 2 - No mutante:
 	    "error": "Forbidden",
 	    "message": "Is not a mutant",
 	    "path": "/mutant"
+	}
+```
+
+### GET /stats
+
+Devuelva un Json con las estadísticas de las verificaciones de ADN.
+
+Ejemplo:
+- Request:
+	
+```json
+	/stats
+```
+
+- Response body:
+
+```json
+	{
+    "count_mutant_dna": 1,
+    "count_human_dna": 2,
+    "ratio": 0.5
 	}
 ```
