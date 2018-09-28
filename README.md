@@ -26,9 +26,9 @@ Los DNA serán únicos por individuo (mutante o humano), por lo tanto las cadena
 Para más detalles revisar la entidad: "Dna.java" en el paquete "com.fmalessio.mercadolibre.Mutants.entity"
 
 Esquema:
-Nombre de la base de datos: "mutantsdb"
-2 Comlumnas: dna (string), is_mutant (boolean)
-dna será el ID, por ejemplo: "ATGCGA-CAGTGC-TTATGT-AGAAGG-CCCCTA-TCACTG"
+Nombre de la base de datos: "mutantsdb".
+2 Comlumnas: dna (string), is_mutant (boolean).
+"dna" será el ID, por ejemplo: "ATGCGA-CAGTGC-TTATGT-AGAAGG-CCCCTA-TCACTG".
 
 ### Endpoints
 
@@ -116,7 +116,7 @@ Ejemplo 2 - No mutante:
 
 ### GET /stats
 
-Devuelva un Json con las estadísticas de las verificaciones de ADN.
+Devuelve un Json con las estadísticas de las verificaciones de ADN.
 
 Ejemplo:
 - Request:
@@ -129,8 +129,8 @@ Ejemplo:
 
 ```json
 	{
-    "count_mutant_dna": 1,
-    "count_human_dna": 2,
-    "ratio": 0.5
+	    "count_mutant_dna": 1,
+	    "count_human_dna": 2,
+	    "ratio": 0.5
 	}
 ```
