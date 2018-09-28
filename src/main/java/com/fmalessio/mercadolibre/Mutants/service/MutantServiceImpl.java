@@ -8,8 +8,10 @@ import org.springframework.stereotype.Service;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fmalessio.mercadolibre.Mutans.validator.DnaValidator;
 import com.fmalessio.mercadolibre.Mutants.dto.DnaDTO;
 import com.fmalessio.mercadolibre.Mutants.dto.StatsDTO;
+import com.fmalessio.mercadolibre.Mutants.exception.DnaNotValidException;
 import com.fmalessio.mercadolibre.Mutants.repository.DnaRepository;
 
 @Service
@@ -18,7 +20,11 @@ public class MutantServiceImpl implements MutantService {
 	@Autowired
 	private DnaRepository dnaRepository;
 
-	public boolean isMutant(String[] dna) {
+	public boolean isMutant(String[] dna) throws DnaNotValidException {
+		if (!DnaValidator.isValid(dna)) {
+			throw new DnaNotValidException();
+		}
+
 		int dnaSameSequenceCounter = checkFrontDirectionDnaWrapper(dna) + checkDownDirectionDna(dna)
 				+ checkDiagonalDownDirectionDna(dna) + checkDiagonalUpDirectionDna(dna);
 
@@ -177,10 +183,6 @@ public class MutantServiceImpl implements MutantService {
 		}
 
 		return dnaSameSequence;
-	}
-
-	public static boolean isValidDna(String[] dna) {
-		return true;
 	}
 
 	@Override

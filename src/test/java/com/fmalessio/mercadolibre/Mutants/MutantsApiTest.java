@@ -17,6 +17,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
 import com.fmalessio.mercadolibre.Mutants.controller.MutantController;
+import com.fmalessio.mercadolibre.Mutants.exception.DnaNotValidException;
 import com.fmalessio.mercadolibre.Mutants.repository.DnaRepository;
 import com.fmalessio.mercadolibre.Mutants.service.MutantService;
 
@@ -34,7 +35,7 @@ public class MutantsApiTest {
 	private MutantService mutantService;
 
 	@Test
-	public void isMutant() throws Exception {
+	public void isMutant() throws Exception, DnaNotValidException {
 		String[] dna = { "FTGCGA", "CAGTGC", "TTATGT", "AGAAGG", "ACCCTA", "TCACTG" };
 		JSONObject body = new JSONObject();
 		body.put("dna", new JSONArray(dna));
@@ -47,7 +48,7 @@ public class MutantsApiTest {
 	}
 
 	@Test
-	public void isHuman() throws Exception {
+	public void isHuman() throws Exception, DnaNotValidException {
 		String[] dna = { "ATGCGA", "CAGTGC", "TTATTT", "AGACGG", "GCGTCA", "TCACTG" };
 		JSONObject body = new JSONObject();
 		body.put("dna", new JSONArray(dna));

@@ -11,6 +11,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import com.fmalessio.mercadolibre.Mutants.exception.DnaNotValidException;
 import com.fmalessio.mercadolibre.Mutants.repository.DnaRepository;
 import com.fmalessio.mercadolibre.Mutants.service.MutantService;
 import com.fmalessio.mercadolibre.Mutants.service.MutantServiceImpl;
@@ -33,27 +34,27 @@ public class MutantsTest {
 	}
 
 	@Test
-	public void isMutantFrontDirectionTest() {
+	public void isMutantFrontDirectionTest() throws DnaNotValidException {
 		System.out.println("Front direction:");
 
-		String[] dna = { "FTGCGA", "CAGTAC", "TTATGT", "AGAAGG", "AAAATA", "CCCCTA" };
+		String[] dna = { "CTGCGA", "CAGTAC", "TTATGT", "AGAAGG", "AAAATA", "CCCCTA" };
 		printDnaInCosole(dna);
 
 		assertEquals(true, mutantService.isMutant(dna));
 	}
 
 	@Test
-	public void isMutantDownDirectionTest() {
+	public void isMutantDownDirectionTest() throws DnaNotValidException {
 		System.out.println("Down direction:");
 
-		String[] dna = { "FTGCGA", "CAGGGC", "TTATGT", "AGAAGG", "ACCCTA", "TCACTG" };
+		String[] dna = { "CTGCGA", "CAGGGC", "TTATGT", "AGAAGG", "ACCCTA", "TCACTG" };
 		printDnaInCosole(dna);
 
 		assertEquals(true, mutantService.isMutant(dna));
 	}
 
 	@Test
-	public void isMutantDiagonalDownDirectionTest() {
+	public void isMutantDiagonalDownDirectionTest() throws DnaNotValidException {
 		System.out.println("Diaginal down direction:");
 
 		String[] dna = { "ATCCGA", "CAGCTC", "TTATCT", "AGAAGC", "ACCCTA", "TCACTG" };
@@ -63,7 +64,7 @@ public class MutantsTest {
 	}
 
 	@Test
-	public void isMutantDiagonalUpDirectionTest() {
+	public void isMutantDiagonalUpDirectionTest() throws DnaNotValidException {
 		System.out.println("Diaginal up direction:");
 
 		String[] dna = { "TTGAAT", "CAATTC", "TAGTGT", "AGTGGG", "ATCCGA", "TCACTT" };
@@ -73,7 +74,7 @@ public class MutantsTest {
 	}
 
 	@Test
-	public void isMutantMixTest() {
+	public void isMutantMixTest() throws DnaNotValidException {
 		System.out.println("Diaginal up direction:");
 
 		String[] dna = { "ATGCGA", "CAGTGC", "TTATGT", "AGAAGG", "CCCCTA", "TCACTG" };
@@ -83,7 +84,7 @@ public class MutantsTest {
 	}
 
 	@Test
-	public void isHumanTest() {
+	public void isHumanTest() throws DnaNotValidException {
 		System.out.println("Human:");
 
 		String[] dna = { "ATGCGA", "CAGTGC", "TTATTT", "AGACGG", "GCGTCA", "TCACTG" };
@@ -94,6 +95,8 @@ public class MutantsTest {
 
 	@Test
 	public void stats() throws Exception {
+		System.out.println("Stats...");
+
 		when(dnaRepository.countByIsMutant(true)).thenReturn(new Long(40));
 		when(dnaRepository.countByIsMutant(false)).thenReturn(new Long(100));
 

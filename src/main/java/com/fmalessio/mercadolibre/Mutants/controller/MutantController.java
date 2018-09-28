@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fmalessio.mercadolibre.Mutants.dto.DnaDTO;
+import com.fmalessio.mercadolibre.Mutants.exception.DnaNotValidException;
 import com.fmalessio.mercadolibre.Mutants.exception.NotMutantException;
 import com.fmalessio.mercadolibre.Mutants.service.MutantService;
 
@@ -34,7 +35,7 @@ public class MutantController {
 
 	@PostMapping("/mutant")
 	@ResponseStatus(value = HttpStatus.OK)
-	public void isMutant(@RequestBody DnaDTO dnaDTO) throws NotMutantException {
+	public void isMutant(@RequestBody DnaDTO dnaDTO) throws NotMutantException, DnaNotValidException {
 		if (!mutantService.isMutant(dnaDTO.getDna())) {
 			throw new NotMutantException();
 		}
@@ -46,6 +47,9 @@ public class MutantController {
 	public void notMutantHandler() {
 	}
 
-	// TODO: 400 Bad request, validate DNA
+	@ResponseStatus(value = HttpStatus.BAD_REQUEST, reason = "Is not a valid DNA") // 400
+	@ExceptionHandler(DnaNotValidException.class)
+	public void notValidDnaHandler() {
+	}
 
 }
