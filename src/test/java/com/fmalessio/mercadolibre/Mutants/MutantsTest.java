@@ -1,6 +1,7 @@
 package com.fmalessio.mercadolibre.Mutants;
 
 import static org.junit.Assert.assertEquals;
+import static org.mockito.Mockito.when;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -19,7 +20,7 @@ public class MutantsTest {
 
 	@Autowired
 	private MutantService mutantService;
-	
+
 	@MockBean
 	private DnaRepository dnaRepository;
 
@@ -89,6 +90,14 @@ public class MutantsTest {
 		printDnaInCosole(dna);
 
 		assertEquals(false, mutantService.isMutant(dna));
+	}
+
+	@Test
+	public void stats() throws Exception {
+		when(dnaRepository.countByIsMutant(true)).thenReturn(new Long(40));
+		when(dnaRepository.countByIsMutant(false)).thenReturn(new Long(100));
+
+		assertEquals("{\"count_mutant_dna\":40,\"count_human_dna\":100,\"ratio\":0.4}", mutantService.getStats());
 	}
 
 	private void printDnaInCosole(String[] dna) {

@@ -17,6 +17,8 @@ interface MyBaseRepository<T, ID extends Serializable> extends JpaRepository<T, 
 
 public interface DnaRepository extends MyBaseRepository<Dna, String> {
 
-	Dna findByIsMutant(boolean isMutant);
+	Dna findByDna(String dna);
+
+	Long countByIsMutant(boolean isMutant);
 
 }

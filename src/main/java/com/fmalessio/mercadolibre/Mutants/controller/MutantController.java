@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fmalessio.mercadolibre.Mutants.dto.DnaDTO;
 import com.fmalessio.mercadolibre.Mutants.exception.NotMutantException;
 import com.fmalessio.mercadolibre.Mutants.service.MutantService;
@@ -26,6 +27,11 @@ public class MutantController {
 		return String.format("Hello %s!", name);
 	}
 
+	@GetMapping("/stats")
+	public @ResponseBody String stats() throws JsonProcessingException {
+		return mutantService.getStats();
+	}
+
 	@PostMapping("/mutant")
 	@ResponseStatus(value = HttpStatus.OK)
 	public void isMutant(@RequestBody DnaDTO dnaDTO) throws NotMutantException {
@@ -39,5 +45,7 @@ public class MutantController {
 	@ExceptionHandler(NotMutantException.class)
 	public void notMutantHandler() {
 	}
+
+	// TODO: 400 Bad request, validate DNA
 
 }

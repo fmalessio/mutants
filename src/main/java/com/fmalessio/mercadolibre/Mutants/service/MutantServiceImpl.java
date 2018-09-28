@@ -1,9 +1,15 @@
 package com.fmalessio.mercadolibre.Mutants.service;
 
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fmalessio.mercadolibre.Mutants.dto.DnaDTO;
+import com.fmalessio.mercadolibre.Mutants.dto.StatsDTO;
 import com.fmalessio.mercadolibre.Mutants.repository.DnaRepository;
 
 @Service
@@ -175,6 +181,31 @@ public class MutantServiceImpl implements MutantService {
 
 	public static boolean isValidDna(String[] dna) {
 		return true;
+	}
+
+	@Override
+	public String getStats() throws JsonProcessingException {
+		long humansAmount = dnaRepository.countByIsMutant(false);
+		long mutantsAmount = dnaRepository.countByIsMutant(true);
+
+		double stats = 0;
+
+		if (humansAmount > 0) {
+			stats = (double) mutantsAmount / humansAmount;
+		} else if (mutantsAmount > 0) {
+			stats = 1;
+		}
+
+		// Format stats rules
+		DecimalFormat df = new DecimalFormat("#.##");
+		DecimalFormatSymbols dfs = df.getDecimalFormatSymbols();
+		dfs.setDecimalSeparator('.');
+		df.setDecimalFormatSymbols(dfs);
+
+		StatsDTO statsDTO = new StatsDTO(humansAmount, mutantsAmount, Double.parseDouble(df.format(stats)));
+
+		ObjectMapper mapper = new ObjectMapper();
+		return mapper.writeValueAsString(statsDTO);
 	}
 
 }

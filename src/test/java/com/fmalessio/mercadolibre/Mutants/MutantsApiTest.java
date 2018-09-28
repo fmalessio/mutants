@@ -1,6 +1,7 @@
 package com.fmalessio.mercadolibre.Mutants;
 
 import static org.mockito.Mockito.when;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -16,6 +17,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
 import com.fmalessio.mercadolibre.Mutants.controller.MutantController;
+import com.fmalessio.mercadolibre.Mutants.repository.DnaRepository;
 import com.fmalessio.mercadolibre.Mutants.service.MutantService;
 
 @RunWith(SpringRunner.class)
@@ -24,6 +26,9 @@ public class MutantsApiTest {
 
 	@Autowired
 	private MockMvc mvc;
+
+	@MockBean
+	private DnaRepository dnaRepository;
 
 	@MockBean
 	private MutantService mutantService;
@@ -52,6 +57,12 @@ public class MutantsApiTest {
 		// Expected 403
 		mvc.perform(post("/mutant").contentType(MediaType.APPLICATION_JSON_UTF8).content(body.toString()))
 				.andExpect(status().isForbidden());
+	}
+
+	@Test
+	public void stats() throws Exception {
+		// Expected 200
+		mvc.perform(get("/stats").contentType(MediaType.APPLICATION_JSON_UTF8)).andExpect(status().isOk());
 	}
 
 }
