@@ -19,6 +19,7 @@ public interface DnaRepository extends MyBaseRepository<Dna, String> {
 
 	Dna findByDna(String dna);
 
+	// @Cacheable("mutantsOrHumans")
 	Long countByIsMutant(boolean isMutant);
 
 }
