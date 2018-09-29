@@ -4,6 +4,7 @@ Tecnologías utilizadas Java, Spring boot, JPA, MVC, Amazon Web Services (AWS) y
 
 ## Local
 Para ejecutar la aplicación en el ambiente local debemos ir hasta la clase "MutantsApplication" en el paquete "com.fmalessio.mercadolibre.Mutants", luego click derecho sobre la clase "Run as" -> "Java application".
+Se necesita conexión a internet para hacer las pruebas locales, debido a que re conecta a una base de datos remota.
 
 Luego, desde cualquier cliente HTTP (Postman recomendado), se podrán ejecutar los [endpoints](#endpoints) utilizando la URL:
 
@@ -17,12 +18,12 @@ Se podrán ejecutar los [endpoints](#endpoints) utilizando la URL:
 	
 ## Base de datos
 
-Se utiliza una base de datos relacional MySQL:
+Se utiliza una base de datos relacional MySQL, servicio de AWS llamado RDS:
 
 	- mutantsdb.cbmkeepkk0bf.sa-east-1.rds.amazonaws.com
 
 Comentarios:
-Los DNA serán únicos por individuo (mutante o humano), por lo tanto las cadenas que adn se concatenan con "-" y se guardan como un identificador.
+Los DNA serán únicos por individuo (mutante o humano), por lo tanto las cadenas de adn se concatenan con "-" y se guardan como un identificador. 
 Para más detalles revisar la entidad: "Dna.java" en el paquete "com.fmalessio.mercadolibre.Mutants.entity"
 
 Esquema:
